@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sněžka Duathlon Challenge 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,300&display=swap" rel="stylesheet">
+<style>
+:root{--w:#f2ede4;--dk:#0b0f18;--mid:#131a28;--card:#0f1520;--acc:#e6420a;--acc2:#ff6830;--ice:#7ecde8;--gold:#c8a44a;--grn:#3a9c6f;--sn:rgba(242,237,228,0.05)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Barlow',sans-serif;background:var(--dk);color:var(--w);overflow-x:hidden}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--dk)}::-webkit-scrollbar-thumb{background:var(--acc)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:18px 52px;background:linear-gradient(to bottom,rgba(11,15,24,.97),transparent);backdrop-filter:blur(4px);border-bottom:1px solid rgba(242,237,228,.04)}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.14em;color:var(--w);text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo-b{background:var(--acc);color:var(--w);font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;padding:3px 8px;font-family:'Barlow',sans-serif;font-weight:700}
+nav ul{display:flex;gap:28px;list-style:none}
+nav a{font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(242,237,228,.55);text-decoration:none;transition:color .2s}
+nav a:hover{color:var(--acc)}
+.nct{background:var(--acc);color:var(--w)!important;padding:9px 20px;clip-path:polygon(0 0,calc(100% - 7px) 0,100% 7px,100% 100%,7px 100%,0 calc(100% - 7px))}
+.nct:hover{background:var(--acc2)!important}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 52px 80px;overflow:hidden}
+.hbg{position:absolute;inset:0;background:radial-gradient(ellipse 100% 70% at 55% 20%,rgba(126,205,232,.06) 0%,transparent 65%),linear-gradient(170deg,#0b0f18 0%,#0d1628 50%,#0b1520 100%)}
+.hmtn{position:absolute;bottom:0;left:0;right:0;width:100%;pointer-events:none;opacity:.22}
+.snwrap{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.sf{position:absolute;background:rgba(255,255,255,.8);border-radius:50%;animation:snfall linear infinite}
+@keyframes snfall{0%{transform:translateY(-20px) translateX(0) rotate(0deg);opacity:.7}100%{transform:translateY(105vh) translateX(40px) rotate(360deg);opacity:0}}
+.hey{font-size:.68rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--acc);margin-bottom:14px;position:relative;z-index:2;animation:fdu 1s ease both .1s}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(5.5rem,15vw,13.5rem);line-height:.85;letter-spacing:.03em;position:relative;z-index:2;animation:fdu 1s ease both .3s}
+.hero h1 .l2{color:var(--ice);display:block}
+.hmeta{display:flex;gap:36px;margin-top:26px;position:relative;z-index:2;animation:fdu 1s ease both .5s}
+.hmi{display:flex;flex-direction:column;gap:3px}
+.hml{font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(242,237,228,.32)}
+.hmv{font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.08em;color:var(--w)}
+.hcta{margin-top:38px;display:flex;gap:16px;align-items:center;position:relative;z-index:2;animation:fdu 1s ease both .7s}
+.btn{display:inline-block;padding:15px 38px;font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;transition:.2s;cursor:pointer;border:none}
+.btnp{background:var(--acc);color:var(--w);clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}
+.btnp:hover{background:var(--acc2);transform:translateY(-2px)}
+.btng{border:1px solid rgba(242,237,228,.2);color:rgba(242,237,228,.65)}
+.btng:hover{border-color:var(--ice);color:var(--ice)}
+.hr{position:absolute;right:52px;top:50%;transform:translateY(-50%);z-index:2;animation:fdi 1.5s ease both .8s;text-align:right}
+.hdd{font-family:'Bebas Neue',sans-serif;font-size:8.5rem;line-height:.8;color:rgba(126,205,232,.07);letter-spacing:-.02em}
+.hdm{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:.12em;color:rgba(126,205,232,.1)}
+.rst{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-top:10px}
+.rdt{font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(242,237,228,.4)}
+.rd{width:8px;height:8px;border-radius:50%;background:var(--acc);flex-shrink:0}
+.rd.t{background:var(--ice)}.rd.b{background:var(--gold)}
+.rl{width:1px;height:18px;background:linear-gradient(var(--acc),var(--ice));margin-left:auto;margin-right:3px}
+@keyframes fdu{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fdi{from{opacity:0}to{opacity:1}}
+
+/* STATS */
+.sbar{background:var(--acc);display:grid;grid-template-columns:repeat(5,1fr)}
+.st{padding:20px 24px;border-right:1px solid rgba(11,15,24,.18);display:flex;flex-direction:column;gap:3px}
+.st:last-child{border-right:none}
+.stn{font-family:'Bebas Neue',sans-serif;font-size:2rem;line-height:1;letter-spacing:.05em;color:var(--w)}
+.stl{font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(11,15,24,.55)}
+
+/* SECTIONS */
+section{padding:96px 52px}
+.stag{font-size:.63rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--acc);margin-bottom:16px}
+h2.st{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,6vw,5.2rem);line-height:.88;letter-spacing:.04em}
+.mut{color:rgba(242,237,228,.18)}
+.dv{width:44px;height:2px;background:var(--acc);margin:22px 0}
+.card{padding:22px 26px;background:var(--sn);border:1px solid rgba(126,205,232,.07);border-left:3px solid var(--acc);display:flex;gap:16px;align-items:flex-start}
+.ci{font-size:1.5rem;flex-shrink:0;width:40px;text-align:center}
+.ct{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ice);margin-bottom:4px}
+.cd{font-size:.86rem;font-weight:300;color:rgba(242,237,228,.55);line-height:1.6}
+
+/* ABOUT */
+#oz{background:var(--dk)}
+.ag{display:grid;grid-template-columns:1fr 1fr;gap:72px;margin-top:60px;align-items:start}
+.at p{font-size:1rem;line-height:1.82;font-weight:300;color:rgba(242,237,228,.72);margin-bottom:16px}
+.at p strong{color:var(--w);font-weight:600}
+.acl{display:flex;flex-direction:column;gap:14px}
+
+/* ROUTE */
+#tr{background:var(--mid)}
+.rpath{display:flex;align-items:stretch;gap:0;margin-top:60px}
+.rnode{flex:1;padding:32px 24px;position:relative}
+.rnode:nth-child(1){background:rgba(13,21,32,.8);border-top:3px solid var(--acc)}
+.rnode:nth-child(2){background:rgba(13,21,32,.6);border-top:3px solid var(--ice)}
+.rnode:nth-child(3){background:rgba(13,21,32,.8);border-top:3px solid var(--gold)}
+.rnode:nth-child(4){background:rgba(13,21,32,.6);border-top:3px solid var(--grn)}
+.rnph{font-size:.58rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
+.rnph.r{color:var(--acc)}.rnph.s{color:var(--ice)}.rnph.t1{color:var(--gold)}.rnph.bk{color:var(--grn)}
+.rnn{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:.05em;line-height:1;margin-bottom:5px}
+.rnl{font-size:.75rem;font-weight:300;color:rgba(242,237,228,.4);font-style:italic;margin-bottom:12px}
+.rnd{font-size:.8rem;font-weight:300;color:rgba(242,237,228,.58);line-height:1.6}
+.rnarr{position:absolute;right:-14px;top:50%;transform:translateY(-50%);width:28px;height:28px;background:var(--dk);border:1px solid rgba(242,237,228,.08);display:flex;align-items:center;justify-content:center;font-size:.75rem;z-index:10}
+.ris{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:2px}
+.ri{padding:18px 24px;background:rgba(11,15,24,.6);display:flex;flex-direction:column;gap:3px}
+.rik{font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(242,237,228,.28)}
+.riv{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.06em;color:var(--w)}
+
+/* PROGRAM */
+#pg{background:var(--dk)}
+.tl{margin-top:60px;display:flex;flex-direction:column;gap:0;position:relative;padding-left:56px}
+.tl::before{content:'';position:absolute;left:18px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--acc),rgba(126,205,232,.2),transparent)}
+.tli{display:grid;grid-template-columns:84px 1fr;gap:28px;padding:24px 0;border-bottom:1px solid rgba(242,237,228,.04);position:relative;align-items:start}
+.tli::before{content:'';position:absolute;left:-45px;top:30px;width:9px;height:9px;border-radius:50%;background:var(--dk);border:2px solid var(--acc)}
+.tli.k::before{background:var(--acc);width:13px;height:13px;left:-47px;top:28px}
+.tlt{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.08em;color:var(--acc);line-height:1}
+.tltit{font-size:.98rem;font-weight:600;color:var(--w);margin-bottom:4px}
+.tld{font-size:.83rem;font-weight:300;color:rgba(242,237,228,.5);line-height:1.6}
+.tlloc{display:inline-block;margin-top:7px;font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:3px 9px;border:1px solid rgba(126,205,232,.18);color:var(--ice)}
+
+/* SPONSORING */
+#sp{background:var(--mid)}
+.spkg{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px}
+.spk{padding:40px 32px;background:rgba(11,15,24,.7);position:relative;border-top:3px solid transparent;transition:.3s}
+.spk.sm{border-color:var(--gold)}.spk.al{border-color:var(--ice)}.spk.bc{border-color:var(--grn)}
+.spk:hover{background:rgba(11,15,24,.95)}
+.spe{position:absolute;top:14px;right:14px;font-size:.56rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--acc);background:rgba(230,66,10,.12);padding:3px 9px;border:1px solid rgba(230,66,10,.24)}
+.spb{display:inline-flex;align-items:center;gap:7px;padding:4px 12px;margin-bottom:18px;font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;border:1px solid}
+.spb.sm{color:var(--gold);border-color:rgba(200,164,74,.3);background:rgba(200,164,74,.08)}
+.spb.al{color:var(--ice);border-color:rgba(126,205,232,.3);background:rgba(126,205,232,.08)}
+.spb.bc{color:var(--grn);border-color:rgba(58,156,111,.3);background:rgba(58,156,111,.08)}
+.spn{font-family:'Bebas Neue',sans-serif;font-size:2.6rem;letter-spacing:.05em;line-height:1;margin-bottom:4px}
+.sptag{font-size:.77rem;font-weight:300;color:rgba(242,237,228,.38);font-style:italic;margin-bottom:24px}
+.spp{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;letter-spacing:.04em;line-height:1;margin-bottom:5px}
+.spp.sm{color:var(--gold)}.spp.al{color:var(--ice)}.spp.bc{color:var(--grn)}
+.spn2{font-size:.63rem;font-weight:300;color:rgba(242,237,228,.28);margin-bottom:28px}
+.spdv{width:100%;height:1px;background:rgba(242,237,228,.06);margin-bottom:22px}
+.spks{display:flex;flex-direction:column;gap:9px}
+.spk2{display:flex;gap:9px;align-items:flex-start}
+.spck{font-size:.72rem;color:var(--acc);flex-shrink:0;margin-top:2px}
+.spkt{font-size:.81rem;font-weight:300;color:rgba(242,237,228,.64);line-height:1.5}
+.spsl{margin-top:22px;font-size:.63rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(242,237,228,.28)}
+.alcarte{margin-top:52px}
+.acg{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin-top:26px}
+.aci{padding:22px 18px;background:rgba(11,15,24,.5);border-top:2px solid rgba(242,237,228,.07)}
+.acik{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(242,237,228,.28);margin-bottom:7px}
+.aciv{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.05em;color:var(--acc)}
+.acid{font-size:.78rem;font-weight:300;color:rgba(242,237,228,.48);margin-top:5px;line-height:1.5}
+.chb{background:linear-gradient(135deg,#0b1f14,#0d2818);border:1px solid rgba(58,156,111,.2);padding:52px 60px;margin-top:72px;display:grid;grid-template-columns:1fr auto;gap:44px;align-items:center}
+.chl{font-size:.63rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--grn);margin-bottom:10px}
+.cht{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;letter-spacing:.05em;line-height:.9;margin-bottom:14px}
+.chd{font-size:.93rem;font-weight:300;color:rgba(242,237,228,.63);line-height:1.78;max-width:560px}
+.chp{font-family:'Bebas Neue',sans-serif;font-size:6.5rem;line-height:.85;color:var(--grn);letter-spacing:-.02em;flex-shrink:0}
+.chps{display:block;font-family:'Barlow',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(58,156,111,.65);margin-top:4px}
+
+/* LOCATION */
+#mi{background:var(--dk)}
+.mg{display:grid;grid-template-columns:1fr 1fr;gap:72px;margin-top:60px;align-items:start}
+.mmap{background:var(--mid);border:1px solid rgba(126,205,232,.08);aspect-ratio:4/3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;position:relative;overflow:hidden}
+.lpts{display:flex;flex-direction:column;gap:16px;margin-top:18px}
+.lpt{display:flex;gap:16px;align-items:flex-start;padding:18px 22px;background:var(--sn);border-left:2px solid}
+.lpt.s{border-color:var(--acc)}.lpt.t{border-color:var(--ice)}.lpt.t1{border-color:var(--gold)}.lpt.f{border-color:var(--grn)}
+.lpi{font-size:1.4rem;flex-shrink:0;width:38px;text-align:center}
+.lpn{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--w);margin-bottom:4px}
+.lpd{font-size:.82rem;font-weight:300;color:rgba(242,237,228,.5);line-height:1.5}
+.lpa{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.06em;margin-top:5px}
+.lpa.s{color:var(--acc)}.lpa.t{color:var(--ice)}.lpa.t1{color:var(--gold)}.lpa.f{color:var(--grn)}
+.mii h3{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.05em;margin-bottom:18px}
+.mii p{font-size:.92rem;font-weight:300;color:rgba(242,237,228,.63);line-height:1.8;margin-bottom:12px}
+.tpls{display:flex;flex-wrap:wrap;gap:9px;margin-top:26px}
+.pill{padding:7px 16px;border:1px solid rgba(126,205,232,.17);font-size:.66rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ice)}
+
+/* REG */
+#rg{background:var(--mid)}
+.rl2{display:grid;grid-template-columns:1fr 1fr;gap:72px;margin-top:60px;align-items:start}
+.rwh h3{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:.05em;color:var(--ice);margin-bottom:24px}
+.rss{display:flex;flex-direction:column;gap:24px}
+.rs{display:flex;gap:18px;align-items:flex-start}
+.rsn{font-family:'Bebas Neue',sans-serif;font-size:3rem;line-height:.8;color:rgba(230,66,10,.22);flex-shrink:0;width:48px}
+.rst2{font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--w);margin-bottom:4px}
+.rsd{font-size:.85rem;font-weight:300;color:rgba(242,237,228,.5);line-height:1.55}
+.rf{background:rgba(11,15,24,.7);border:1px solid rgba(242,237,228,.07);padding:44px 40px}
+.rf h3{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:.05em;margin-bottom:6px}
+.rfs{font-size:.8rem;font-weight:300;color:rgba(242,237,228,.38);margin-bottom:28px}
+.fg{margin-bottom:16px}
+.fg label{display:block;font-size:.61rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(242,237,228,.33);margin-bottom:6px}
+.fg input,.fg select{width:100%;padding:12px 15px;background:rgba(11,15,24,.9);border:1px solid rgba(242,237,228,.09);color:var(--w);font-family:'Barlow',sans-serif;font-size:.91rem;outline:none;transition:border-color .2s;-webkit-appearance:none}
+.fg input:focus,.fg select:focus{border-color:var(--acc)}
+.fg select option{background:var(--dk)}
+.fgr{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fpn{background:rgba(230,66,10,.08);border:1px solid rgba(230,66,10,.17);padding:12px 16px;margin-bottom:18px;font-size:.78rem;font-weight:300;color:rgba(242,237,228,.58);line-height:1.5}
+.fpn strong{color:var(--acc)}
+.fsb{width:100%;padding:16px;background:var(--acc);border:none;cursor:pointer;font-family:'Barlow',sans-serif;font-size:.73rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--w);transition:background .2s;clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,9px 100%,0 calc(100% - 9px))}
+.fsb:hover{background:var(--acc2)}
+.fnt{margin-top:10px;font-size:.66rem;font-weight:300;color:rgba(242,237,228,.26);text-align:center;line-height:1.6}
+
+/* CONTACT */
+#kt{background:var(--dk);padding:80px 52px}
+.kg{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;margin-top:52px}
+.kc{padding:32px 28px;background:var(--sn);border:1px solid rgba(242,237,228,.06)}
+.kci{font-size:1.8rem;margin-bottom:12px}
+.kct{font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(242,237,228,.32);margin-bottom:9px}
+.kcv{font-size:1rem;font-weight:600;color:var(--w)}
+.kcv a{color:var(--ice);text-decoration:none}
+.kcv a:hover{color:var(--acc)}
+.socr{display:flex;gap:16px;margin-top:36px}
+.socb{padding:11px 24px;border:1px solid rgba(242,237,228,.13);font-size:.68rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(242,237,228,.52);text-decoration:none;transition:.2s}
+.socb:hover{border-color:var(--acc);color:var(--acc)}
+
+/* FOOTER */
+footer{background:#070b12;padding:52px 52px 28px;border-top:1px solid rgba(242,237,228,.04)}
+.ftop{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:56px;margin-bottom:52px}
+.fbl{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:.12em;color:var(--w);display:block;margin-bottom:10px}
+.fbl span{color:var(--acc)}
+.fbd{font-size:.83rem;font-weight:300;color:rgba(242,237,228,.33);line-height:1.7;max-width:240px}
+.fc h4{font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(242,237,228,.26);margin-bottom:16px}
+.fc ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.fc a{font-size:.83rem;font-weight:300;color:rgba(242,237,228,.46);text-decoration:none;transition:color .2s}
+.fc a:hover{color:var(--ice)}
+.fbot{padding-top:26px;border-top:1px solid rgba(242,237,228,.05);display:flex;justify-content:space-between;align-items:center}
+.fbot p{font-size:.68rem;font-weight:300;color:rgba(242,237,228,.2)}
+.fsoc{display:flex;gap:16px}
+.fsoc a{font-size:.63rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(242,237,228,.23);text-decoration:none;transition:color .2s}
+.fsoc a:hover{color:var(--acc)}
+
+@media(max-width:1024px){
+  nav{padding:15px 24px}nav ul{display:none}
+  section{padding:68px 24px}
+  .hero{padding:0 24px 68px}
+  .ag,.mg,.rl2{grid-template-columns:1fr;gap:44px}
+  .spkg{grid-template-columns:1fr;gap:2px}
+  .kg{grid-template-columns:1fr}
+  .ftop{grid-template-columns:1fr 1fr;gap:36px}
+  .hr{display:none}
+  .sbar{grid-template-columns:repeat(3,1fr)}
+  .rpath{flex-direction:column}
+  .ris{grid-template-columns:repeat(2,1fr)}
+  .chb{grid-template-columns:1fr}
+  .acg{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">Sněžka Duathlon<span class="logo-b">Challenge</span></a>
+  <ul>
+    <li><a href="#oz">O závodu</a></li>
+    <li><a href="#tr">Trasa</a></li>
+    <li><a href="#pg">Program</a></li>
+    <li><a href="#sp">Sponzoring</a></li>
+    <li><a href="#mi">Místo</a></li>
+    <li><a href="#kt">Kontakt</a></li>
+    <li><a href="#rg" class="nct">Registrace</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hbg"></div>
+  <div class="snwrap" id="snow"></div>
+  <svg class="hmtn" viewBox="0 0 1440 300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <polygon points="0,300 200,175 330,215 490,95 610,155 730,55 870,125 990,75 1110,145 1250,108 1365,168 1440,138 1440,300" fill="rgba(126,205,232,0.14)"/>
+    <polygon points="0,300 110,245 270,198 410,258 570,168 690,208 810,138 930,188 1070,152 1210,192 1345,168 1440,198 1440,300" fill="rgba(11,15,24,0.85)"/>
+  </svg>
+
+  <div class="hey">🏔 Krkonoše · 15. května 2027 · Pec pod Sněžkou</div>
+  <h1>Sněžka<em class="l2">Duathlon</em></h1>
+
+  <div class="hmeta">
+    <div class="hmi"><span class="hml">Datum</span><span class="hmv">15. 5. 2027 · 9:00 CEST</span></div>
+    <div class="hmi"><span class="hml">Start &amp; cíl</span><span class="hmv">Pec pod Sněžkou, SkiResort</span></div>
+    <div class="hmi"><span class="hml">Závodníků</span><span class="hmv">300 — limitovaná kapacita</span></div>
+    <div class="hmi"><span class="hml">Disciplína</span><span class="hmv">Skyrun + Downhill MTB</span></div>
+  </div>
+
+  <div class="hcta">
+    <a href="#rg" class="btn btnp">Zaregistrovat se</a>
+    <a href="#oz" class="btn btng">Více o závodu</a>
+  </div>
+
+  <div class="hr">
+    <div class="hdd">15</div>
+    <div class="hdm">KVĚTNA 2027</div>
+    <div style="margin-top:20px">
+      <div class="rst"><span class="rdt">Start – Pec pod Sněžkou</span><div class="rd"></div></div>
+      <div class="rl"></div>
+      <div class="rst"><span class="rdt">Summit – Sněžka 1603 m</span><div class="rd t"></div></div>
+      <div class="rl"></div>
+      <div class="rst"><span class="rdt">T1 – Luční bouda depot</span><div class="rd b"></div></div>
+      <div class="rl"></div>
+      <div class="rst"><span class="rdt">Cíl – Pec pod Sněžkou</span><div class="rd"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="sbar">
+  <div class="st"><div class="stn">300</div><div class="stl">Závodníků</div></div>
+  <div class="st"><div class="stn">3 500+</div><div class="stl">Diváků</div></div>
+  <div class="st"><div class="stn">1 603 m</div><div class="stl">Vrchol Sněžky</div></div>
+  <div class="st"><div class="stn">10 %</div><div class="stl">Vstupného pro KRNAP</div></div>
+  <div class="st"><div class="stn">LIVE</div><div class="stl">Kamerový přenos</div></div>
+</div>
+
+<!-- O ZÁVODU -->
+<section id="oz">
+  <div class="stag">— Co je Sněžka Duathlon? —</div>
+  <h2 class="st">Ultimate<br><span class="mut">Mountain</span><br>Challenge</h2>
+  <div class="dv"></div>
+  <div class="ag">
+    <div class="at">
+      <p><strong>Sněžka Duathlon Challenge</strong> je unikátní vrcholový závod kombinující dvě disciplíny v srdci Krkonošského národního parku. Závodníci zdolají <strong>Sněžku (1 603 m n.m.)</strong> — nejvyšší horu České republiky — nejprve během, poté sjezdovkou na kole zpět do Pece pod Sněžkou.</p>
+      <p>Závod propojuje <strong>Skyrun</strong> (výběh na vrchol a sestup k Luční boudě) s <strong>Downhill MTB</strong> (sjezd z Luční boudy do Pece pod Sněžkou). Jde o první akci tohoto druhu v Krkonoších — <strong>High-Altitude Duathlon &amp; Adventure Festival</strong>.</p>
+      <p>Součástí akce je festivalová atmosféra, živý kamerový přenos na velké LED obrazovce v Basecampu, afterparty s živou kapelou a slavnostní ceremoniál předání cen. <strong>10 % vstupného</strong> poputuje na ochranu KRNAP a údržbu turistických stezek.</p>
+      <p>Primární cílová skupina závodníků: <strong>20–45 let</strong>, diváci 10–60 let. Poměr M/F: <strong>55 % / 45 %</strong>. Pozváni přední čeští ultrarunneři, horští bikeři a sportovní influenceři.</p>
+    </div>
+    <div class="acl">
+      <div class="card"><div class="ci">🏃</div><div><div class="ct">Skyrun — výběh na Sněžku</div><div class="cd">Výstup z Pece pod Sněžkou na vrchol (1 603 m n.m.) a sestup k Luční boudě. Traverzování hřebenů Krkonoš s úchvatnými výhledy.</div></div></div>
+      <div class="card"><div class="ci">🚵</div><div><div class="ct">Downhill MTB — sjezd na kole</div><div class="cd">Z Luční boudy na kolo a sjezd zpět do Pece pod Sněžkou. Technicky náročná trasa v prostředí národního parku.</div></div></div>
+      <div class="card"><div class="ci">🎪</div><div><div class="ct">Adventure Festival</div><div class="cd">Basecamp fan zóna, live DJ na Sněžce, Vertical Kilometer Challenge, Local Craft Expo a afterparty s kapelou.</div></div></div>
+      <div class="card"><div class="ci">📡</div><div><div class="ct">Live kamerový přenos</div><div class="cd">Přímý přenos z tratě na velkou LED obrazovku v Basecampu po celou dobu závodu. Diváci sledují závodníky v reálném čase.</div></div></div>
+      <div class="card"><div class="ci">🌿</div><div><div class="ct">Environmentální odpovědnost</div><div class="cd">10 % ze startovného věnováno Krkonošskému národnímu parku. Závod organizován ve spolupráci s vedením KRNAP.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRASA -->
+<section id="tr">
+  <div class="stag">— Trasa závodu —</div>
+  <h2 class="st">Run.<br><span class="mut">Summit.</span><br>Ride.</h2>
+  <div class="dv"></div>
+  <div class="rpath">
+    <div class="rnode"><div class="rnarr">▶</div><div class="rnph r">🏃 Fáze 1 · Skyrun</div><div class="rnn">Výběh</div><div class="rnl">Pec pod Sněžkou → Sněžka</div><div class="rnd">Start pod SkiResortem (kapacita 500 osob). Výstup na vrchol Sněžky po vyznačené trase v rámci KRNAP.</div></div>
+    <div class="rnode"><div class="rnarr">▶</div><div class="rnph s">⛰ Vrchol</div><div class="rnn">Sněžka</div><div class="rnl">1 603 m n.m. · Fan zóna</div><div class="rnd">Na vrcholu Fan zóna pro diváky přivezené lanovkou. Živý DJ, rádiové spojení s Basecampem.</div></div>
+    <div class="rnode"><div class="rnarr">▶</div><div class="rnph t1">🔄 Transition T1</div><div class="rnn">Luční b.</div><div class="rnl">Depot kol · Přestup na kolo</div><div class="rnd">Depo kol u Luční boudy. Závodníci přebírají kola pro sjezdovou etapu. 10 VIP vstupenek pro SUMMIT sponzora.</div></div>
+    <div class="rnode"><div class="rnph bk">🚵 Fáze 2 · Downhill</div><div class="rnn">Sjezd</div><div class="rnl">Luční bouda → Pec pod Sněžkou</div><div class="rnd">Sjezd na kole zpět do Pece. Cíl v Basecampu pod SkiResortem. Live přenos prvních finišerů na LED obrazovce.</div></div>
+  </div>
+  <div class="ris">
+    <div class="ri"><div class="rik">Start</div><div class="riv">Pec pod Sněžkou</div></div>
+    <div class="ri"><div class="rik">Nejvyšší bod</div><div class="riv">1 603 m n.m.</div></div>
+    <div class="ri"><div class="rik">Transition T1</div><div class="riv">Luční bouda</div></div>
+    <div class="ri"><div class="rik">Cíl</div><div class="riv">Pec pod Sněžkou</div></div>
+  </div>
+  <div style="margin-top:52px;display:grid;grid-template-columns:1fr 1fr;gap:36px">
+    <div class="card"><div class="ci">🚡</div><div><div class="ct">Přístup pro diváky</div><div class="cd">Diváci přepraveni lanovkou na Sněžku nebo do fan zóny. Smluvní doprava s regionálními dopravci a provozovateli lanovek.</div></div></div>
+    <div class="card"><div class="ci">🛡</div><div><div class="ct">Bezpečnost &amp; KRNAP</div><div class="cd">Koordinace s Horskou záchrannou službou a správou KRNAP. Radiokomunikace mezi zónami. Trasa schválena vedením KRNAP.</div></div></div>
+  </div>
+</section>
+
+<!-- PROGRAM -->
+<section id="pg">
+  <div class="stag">— Program závodního dne —</div>
+  <h2 class="st">Den<br><span class="mut">závodu</span></h2>
+  <div class="dv"></div>
+  <p style="font-size:.92rem;font-weight:300;color:rgba(242,237,228,.52);margin-bottom:0;max-width:580px">Sobota 15. května 2027 · Pec pod Sněžkou &amp; Krkonoše</p>
+  <div class="tl">
+    <div class="tli"><div class="tlt">6:30</div><div><div class="tltit">Staff Briefing</div><div class="tld">Ranní porada pořadatelského týmu, rozdání radií a pověření, kontrola operačních a bezpečnostních instrukcí.</div><span class="tlloc">Basecamp — Pec pod Sněžkou</span></div></div>
+    <div class="tli"><div class="tlt">8:00</div><div><div class="tltit">Příjezd závodníků &amp; Check-in</div><div class="tld">Otevření areálu pro závodníky. LED obrazovka zobrazuje uvítací grafiku a loga sponzorů. Nasazení dobrovolníků, otevření transition zóny.</div><span class="tlloc">Basecamp + Sněžka / Luční bouda</span></div></div>
+    <div class="tli"><div class="tlt">8:40</div><div><div class="tltit">Nástup závodníků do koridoru</div><div class="tld">Výzva závodníkům k přesunu na startovní čáru. Bezpečnostní instrukce opakovaně v audio systému.</div><span class="tlloc">Start Line</span></div></div>
+    <div class="tli"><div class="tlt">8:50</div><div><div class="tltit">Uvítání VIP &amp; sponzorů</div><div class="tld">Přivítání hostů jmenovitě. Zmínka charitativního záměru závodu. Live kamera na hlavní LED obrazovce.</div><span class="tlloc">Start Line</span></div></div>
+    <div class="tli k"><div class="tlt">9:00</div><div><div class="tltit">🚦 Oficiální start závodu</div><div class="tld">Startovní houkačka, dynamická hudba. Na LED obrazovce odpočítávání 10 sekund před startem.</div><span class="tlloc">Start Line — Pec pod Sněžkou</span></div></div>
+    <div class="tli"><div class="tlt">10:00</div><div><div class="tltit">Fan zóna na vrcholu — Live DJ</div><div class="tld">První závodníci dosahují vrcholu Sněžky. Otevření fan zóny. Live DJ. Rádiová komunikace mezi zónami.</div><span class="tlloc">Sněžka — 1 603 m n.m.</span></div></div>
+    <div class="tli"><div class="tlt">11:15</div><div><div class="tltit">T1 — Přestup na kola</div><div class="tld">Závodníci přibíhají k depotu Luční boudy a nasedají na kola. Hlášení čísel předních závodníků do Basecampu.</div><span class="tlloc">Luční bouda — depot</span></div></div>
+    <div class="tli"><div class="tlt">12:00</div><div><div class="tltit">Příprava cílové roviny</div><div class="tld">Příprava cílového prostoru a médií. Budování atmosféry. Live přenos ze sjezdu na LED obrazovce v Basecampu.</div><span class="tlloc">Basecamp — Pec pod Sněžkou</span></div></div>
+    <div class="tli k"><div class="tlt">12:15</div><div><div class="tltit">🏆 První finišeři v cíli</div><div class="tld">Nejrychlejší závodníci překračují cílovou čáru. Okamžité zobrazení TOP 3 a časů na LED obrazovce. Vítězná fanfára.</div><span class="tlloc">Finish Line — Basecamp</span></div></div>
+    <div class="tli"><div class="tlt">14:00</div><div><div class="tltit">Uzavření trasy</div><div class="tld">Poslední závodníci v cíli. Potvrzení od KRNAP a Horské záchranné služby, že trasa je prázdná.</div><span class="tlloc">Celá trasa</span></div></div>
+    <div class="tli k"><div class="tlt">15:00</div><div><div class="tltit">🥇 Slavnostní vyhlášení</div><div class="tld">Vyhlášení vítězů na hlavním pódiu. Předání cen. Předání šeku na charitativní příspěvek pro KRNAP. Fanfáry při medailích.</div><span class="tlloc">Hlavní pódium — Basecamp</span></div></div>
+    <div class="tli k"><div class="tlt">16:00</div><div><div class="tltit">🎵 Afterparty &amp; festival</div><div class="tld">Start pozávodního hudebního festivalu. Kapela / DJ 4–6 hodin. Highlight video ze závodu a rotace log sponzorů na LED obrazovce.</div><span class="tlloc">Basecamp — Pec pod Sněžkou</span></div></div>
+    <div class="tli"><div class="tlt">18:00</div><div><div class="tltit">Post-event debriefing</div><div class="tld">Rychlá porada managementu. Vypnutí techniky, zahájení demontáže areálu.</div><span class="tlloc">Celý areál</span></div></div>
+  </div>
+</section>
+
+<!-- SPONZORING -->
+<section id="sp">
+  <div class="stag">— Partnerství &amp; sponzoring 2027 —</div>
+  <h2 class="st">Připojte<br><span class="mut">svou</span><br>značku</h2>
+  <div class="dv"></div>
+  <p style="font-size:.97rem;font-weight:300;color:rgba(242,237,228,.58);max-width:620px;line-height:1.8">Propojte svou značku s ultimátní horskou výzvou, která inspiruje atlety zdolat Sněžku během a na kole. Závod kombinuje extrémní sport, festivalovou atmosféru a silný přírodní zážitek.</p>
+
+  <div class="spkg">
+    <!-- SUMMIT -->
+    <div class="spk sm">
+      <span class="spe">⭐ Pouze 1 místo</span>
+      <div class="spb sm">🏔 Summit Partner</div>
+      <div class="spn">Summit</div>
+      <div class="sptag">Nejvyšší úroveň — exkluzivní partner závodu</div>
+      <div class="spp sm">od 120 000 Kč</div>
+      <div class="spn2">Partner vybrán na základě předložené nabídky</div>
+      <div class="spdv"></div>
+      <div class="spks">
+        <div class="spk2"><span class="spck">✓</span><span class="spkt">Logo na přední straně startovního čísla všech závodníků</span></div>
+        <div class="spk2"><span class="spck">✓</span><span class="spkt">Logo na přední straně oficiálního FINISHER trička</span></div>
+        <div class="spk2"><span class="spck">✓</span><span class="spkt">Dominantní umístění loga v depotu Luční boudy</span></div>
+        <div class="spk2"><span class="spck">✓</span><span class="spkt">Největší prostor pro brand aktivaci a prodej</span></div>
+        <div class="spk2"><span class="spck">✓</span><span class="spkt">Předávání trofejí vítězům na hlavním pódiu</span></div>
+        <div class="spk2"><span class="spck">✓</span><span class="spkt">Opakované zmínky moderátorem po celý závod</span></div>
+        <div class="spk2"><span class="spck">✓</span><span class="spkt">10 vstupenek Luční bouda (hospitality) + 10 VIP afterparty</span></div>
+        <div class="spk2"><span class="spck">✓</span><span class="spkt">5 oficiálních triček + 5 volných startů</span></div>
+        <div class="spk2"><span class="spck">✓</span><span class="spkt">Produkt v startovním balíčku závodníků</span></div>
+      </div>
+      <div class="spsl">🏔 1 místo · garantovaná exkluzivita</div>
+    </div>
+    <!-- ALPINE -->
+    <div class="spk al">
+      <span class="spe">⭐ Max. 4 místa</span>
+      <div class="spb al">⛰ Alpine Partner</div>
+      <div class="spn">Alpine</div>
+      <div class="sptag">Klíčový partner — silná viditelnost a přímé spojení s atlety</div>
+      <div class="spp al">50 000 Kč</div>
+      <div class="spn2">4 dostupná místa</div>
+      <div class="spdv"></div>
+      <div class="spks">
+        <div class="spk2"><span class="spck">✓</span><span class="spkt">Logo na rukávu oficiálního FINISHER trička</span></div>
+        <div class="spk2"><span class="spck">✓</span><span class="spkt">Viditelné logo na 6 frekventovaných místech tratě</span></div>
+        <div class="spk2"><span class="spck">✓</span><span class="spkt">Zmínky v obsahu na sociálních sítích</span></div>
+        <div class="spk2"><span class="spck">✓</span><span class="spkt">Logo v horní části desky oficiálních partnerů</span></div>
+        <div class="spk2"><span class="spck">✓</span><span class="spkt">Speciálně navržený prostor pro brand aktivaci</span></div>
+        <div class="spk2"><span class="spck">✓</span><span class="spkt">Možnost produktu ve startovních balíčcích atletů</span></div>
+        <div class="spk2"><span class="spck">✓</span><span class="spkt">4 vstupenky Luční bouda (hosp.) + 4 VIP afterparty</span></div>
+        <div class="spk2"><span class="spck">✓</span><span class="spkt">2 trika + 3 volné starty</span></div>
+      </div>
+      <div class="spsl">⛰ Maximálně 4 místa</div>
+    </div>
+    <!-- BASECAMP -->
+    <div class="spk bc">
+      <div class="spb bc">🏕 Basecamp Partner</div>
+      <div class="spn">Base&shy;camp</div>
+      <div class="sptag">Ideální pro menší firmy — esenciální přítomnost v komunitě</div>
+      <div class="spp bc">18 000 Kč</div>
+      <div class="spn2">Otevřený počet partnerů</div>
+      <div class="spdv"></div>
+      <div class="spks">
+        <div class="spk2"><span class="spck">✓</span><span class="spkt">Logo na oficiální desce partnerů závodu</span></div>
+        <div class="spk2"><span class="spck">✓</span><span class="spkt">Veřejné poděkování během festivalu i po závodě</span></div>
+        <div class="spk2"><span class="spck">✓</span><span class="spkt">Logo na webových stránkách závodu</span></div>
+        <div class="spk2"><span class="spck">✓</span><span class="spkt">Prostor pro distribuci zboží ve vyhrazených zónách</span></div>
+        <div class="spk2"><span class="spck">✓</span><span class="spkt">2 VIP vstupenky na afterparty</span></div>
+        <div class="spk2"><span class="spck">✓</span><span class="spkt">1 volný start + 1 oficiální tričko</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- À LA CARTE -->
+  <div class="alcarte">
+    <div class="stag">— Doplňkové možnosti (à la carte) —</div>
+    <div class="acg">
+      <div class="aci"><div class="acik">Hlavní pódium</div><div class="aciv">8 000 Kč</div><div class="acid">Prezentace loga na hlavním festivalovém pódiu</div></div>
+      <div class="aci"><div class="acik">Branding na trati</div><div class="aciv">6 000 Kč</div><div class="acid">Banner / stan na vybraném místě tratě</div></div>
+      <div class="aci"><div class="acik">Sample vložení</div><div class="aciv">5 000 Kč</div><div class="acid">Produkt do startovního balíčku všech atletů</div></div>
+      <div class="aci"><div class="acik">Digitální sponzoring</div><div class="aciv">4 000 Kč</div><div class="acid">Sponzorovaný příspěvek na Instagramu a Facebooku</div></div>
+      <div class="aci"><div class="acik">Press přístup</div><div class="aciv">2 500 Kč</div><div class="acid">Přístup do press zóny pro vašeho fotografa nebo novináře</div></div>
+    </div>
+  </div>
+
+  <!-- CHARITY -->
+  <div class="chb">
+    <div>
+      <div class="chl">🌿 Charitativní závazek</div>
+      <div class="cht">Pro Krkonošský<br>národní park</div>
+      <p class="chd">Každý závodník svou účastí přispívá na ochranu KRNAP a údržbu turistických stezek. <strong style="color:var(--w)">10 % z celkového startovného</strong> věnujeme Správě Krkonošského národního parku. Jako sponzor se přihlásíte k hodnotám udržitelnosti a environmentální odpovědnosti.</p>
+    </div>
+    <div><div class="chp">10%<span class="chps">ze startovného pro KRNAP</span></div></div>
+  </div>
+</section>
+
+<!-- MÍSTO -->
+<section id="mi">
+  <div class="stag">— Místo konání —</div>
+  <h2 class="st">Pec pod<br><span class="mut">Sněžkou</span><br>Krkonoše</h2>
+  <div class="dv"></div>
+  <div class="mg">
+    <div>
+      <div class="mmap">
+        <svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg" style="width:85%;opacity:.25">
+          <polyline points="30,230 80,190 120,205 165,140 210,95 255,115 295,68 340,95 380,80" fill="none" stroke="rgba(126,205,232,0.8)" stroke-width="2.5"/>
+          <circle cx="30" cy="230" r="7" fill="rgba(230,66,10,0.9)"/>
+          <circle cx="295" cy="68" r="9" fill="rgba(126,205,232,0.9)"/>
+          <circle cx="210" cy="95" r="6" fill="rgba(200,164,74,0.9)"/>
+          <text x="36" y="248" fill="rgba(242,237,228,0.7)" font-size="10" font-family="sans-serif">Start / Cíl</text>
+          <text x="278" y="57" fill="rgba(126,205,232,0.8)" font-size="10" font-family="sans-serif">Sněžka 1603m</text>
+          <text x="194" y="112" fill="rgba(200,164,74,0.8)" font-size="10" font-family="sans-serif">Luční b.</text>
+        </svg>
+        <div style="position:absolute;bottom:16px;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.2em;color:rgba(242,237,228,.18)">PEC POD SNĚŽKOU · KRNAP</div>
+      </div>
+      <div class="lpts">
+        <div class="lpt s"><div class="lpi">🏁</div><div><div class="lpn">Start &amp; Cíl — Basecamp</div><div class="lpd">Pod SkiResortem Pec pod Sněžkou. Kapacita areálu 500 osob. Hlavní pódium, LED obrazovka, afterparty.</div><div class="lpa s">~800 m n.m.</div></div></div>
+        <div class="lpt t"><div class="lpi">⛰</div><div><div class="lpn">Vrchol — Sněžka Fan Zóna</div><div class="lpd">Nejvyšší bod závodu. Fan zóna přístupná lanovkou. Live DJ, rádiová komunikace s Basecampem.</div><div class="lpa t">1 603 m n.m.</div></div></div>
+        <div class="lpt t1"><div class="lpi">🔄</div><div><div class="lpn">T1 Transition — Luční bouda</div><div class="lpd">Depot kol. Závodníci přebírají kola pro sjezdovou etapu. 10 VIP vstupenek pro SUMMIT sponzora.</div><div class="lpa t1">~1 410 m n.m.</div></div></div>
+      </div>
+    </div>
+    <div class="mii">
+      <h3>Jak se dostat</h3>
+      <p>Pec pod Sněžkou je snadno dostupná ze všech hlavních měst ČR. Autem z Prahy přibližně 2 hodiny, z Brna cca 3,5 hodiny. <strong>Velkokapacitní parkoviště</strong> přímo v místě startu.</p>
+      <p>Pro diváky zajistíme <strong>smluvní dopravu s regionálními dopravci</strong> a přepravu lanovkami pro pohyb fanoušků na vrchol Sněžky. Koordinace s provozovateli lanových drah.</p>
+      <p>Vzdělávací partnerství s místními školami a sportovními kluby Krkonošského regionu. Spolupráce s turistickým centrem Pec pod Sněžkou.</p>
+      <div class="tpls">
+        <span class="pill">🚗 Velké parkoviště</span>
+        <span class="pill">🚌 Regionální autobus</span>
+        <span class="pill">🚡 Lanovka na Sněžku</span>
+        <span class="pill">🏨 Ubytování v Peci</span>
+        <span class="pill">🌿 KRNAP region</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTRACE -->
+<section id="rg">
+  <div class="stag">— Registrace závodníků —</div>
+  <h2 class="st">Zaregistruj<br><span class="mut">se</span></h2>
+  <div class="dv"></div>
+  <div class="rl2">
+    <div class="rwh">
+      <h3>Jak registrace probíhá</h3>
+      <div class="rss">
+        <div class="rs"><div class="rsn">01</div><div><div class="rst2">Vyplnit formulář</div><div class="rsd">Zadej osobní údaje, zvol kategorii. Registrace spuštěna od listopadu 2026. Kapacita omezena na 300 závodníků.</div></div></div>
+        <div class="rs"><div class="rsn">02</div><div><div class="rst2">Uhradit startovné</div><div class="rsd">Startovné ~3 500 Kč / závodník. Bezpečná online platba. 10 % ze startovného věnováno KRNAP.</div></div></div>
+        <div class="rs"><div class="rsn">03</div><div><div class="rst2">Potvrdit registraci</div><div class="rsd">Na e-mail obdržíš potvrzení s číslem závodníka. Detailní instrukce odeslány v dubnu 2027.</div></div></div>
+        <div class="rs"><div class="rsn">04</div><div><div class="rst2">Dorazit na check-in</div><div class="rsd">Check-in v Basecampu 15. 5. 2027 od 8:00. Obdržíš startovní číslo, čip a poslední instrukce.</div></div></div>
+      </div>
+      <div style="margin-top:36px;padding:24px;background:rgba(58,156,111,.08);border:1px solid rgba(58,156,111,.2)">
+        <div style="font-size:.63rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--grn);margin-bottom:8px">🌿 Environmentální závazek</div>
+        <div style="font-size:.87rem;font-weight:300;color:rgba(242,237,228,.58);line-height:1.7">Svou registrací přispíváš na ochranu Krkonošského národního parku. <strong style="color:var(--w)">10 % tvého startovného</strong> jde přímo na údržbu turistických stezek a ochranu přírody KRNAP.</div>
+      </div>
+    </div>
+    <div class="rf">
+      <h3>Předregistrace</h3>
+      <p class="rfs">Registrace otevřena v listopadu 2026. Zanech kontakt a informujeme tě jako první.</p>
+      <div class="fgr">
+        <div class="fg"><label>Jméno</label><input type="text" placeholder="Jan"></div>
+        <div class="fg"><label>Příjmení</label><input type="text" placeholder="Novák"></div>
+      </div>
+      <div class="fg"><label>E-mail</label><input type="email" placeholder="jan.novak@email.cz"></div>
+      <div class="fg"><label>Telefon</label><input type="tel" placeholder="+420 ···"></div>
+      <div class="fg"><label>Kategorie</label>
+        <select>
+          <option value="">— Vyberte kategorii —</option>
+          <option>Muži 20–34 let</option>
+          <option>Muži 35–44 let</option>
+          <option>Muži 45+ let</option>
+          <option>Ženy 20–34 let</option>
+          <option>Ženy 35–44 let</option>
+          <option>Ženy 45+ let</option>
+        </select>
+      </div>
+      <div class="fg"><label>Zájem o</label>
+        <select>
+          <option>Závod – individuálně</option>
+          <option>Závod – štafeta (2 osoby)</option>
+          <option>Diváci / festival</option>
+          <option>Informace o sponzoringu</option>
+        </select>
+      </div>
+      <div class="fpn">Startovné: <strong>~3 500 Kč</strong> / závodník &nbsp;·&nbsp; Kapacita: <strong>300 závodníků</strong> &nbsp;·&nbsp; Registrace od 11/2026</div>
+      <button class="fsb" type="button" onclick="this.textContent='✓ Zapsáno! Brzy tě kontaktujeme.';this.style.background='#3a9c6f'">Zaregistrovat zájem</button>
+      <p class="fnt">Vyplněním formuláře souhlasíte se zařazením do databáze závodu. Data nebudou poskytnuta třetím stranám.</p>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section id="kt">
+  <div class="stag">— Kontakt —</div>
+  <h2 class="st">Napište<br><span class="mut">nám</span></h2>
+  <div class="dv"></div>
+  <div class="kg">
+    <div class="kc"><div class="kci">✉️</div><div class="kct">E-mail</div><div class="kcv"><a href="mailto:SnezkaDuathlon2027@email.cz">SnezkaDuathlon2027@email.cz</a></div></div>
+    <div class="kc"><div class="kci">🤝</div><div class="kct">Sponzoring &amp; partnerství</div><div class="kcv"><a href="mailto:SnezkaDuathlon2027@email.cz">SnezkaDuathlon2027@email.cz</a></div></div>
+    <div class="kc"><div class="kci">🌐</div><div class="kct">Web</div><div class="kcv"><a href="#">www.SnezkaDuathlon.cz</a></div></div>
+  </div>
+  <div class="socr" style="margin-top:32px">
+    <a href="https://www.instagram.com/snezkaduathlon" class="socb">📸 Instagram @snezkaduathlon</a>
+    <a href="https://www.facebook.com/snezkaduathlon" class="socb">📘 Facebook @snezkaduathlon</a>
+  </div>
+  <div style="margin-top:52px;padding:36px 44px;background:rgba(230,66,10,.06);border:1px solid rgba(230,66,10,.17);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px">
+    <div>
+      <div style="font-size:.63rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--acc);margin-bottom:8px">Tým Sněžka Duathlon Challenge</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:.06em">Novotný · Matějovský · Mužík · Švec</div>
+    </div>
+    <a href="mailto:SnezkaDuathlon2027@email.cz" class="btn btnp">Kontaktujte nás</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ftop">
+    <div>
+      <span class="fbl">Sněžka<span>D</span>uathlon</span>
+      <p class="fbd">High-Altitude Duathlon &amp; Adventure Festival v srdci Krkonošského národního parku. Sněžka, 15. května 2027.</p>
+    </div>
+    <div class="fc"><h4>Závod</h4><ul><li><a href="#oz">O závodu</a></li><li><a href="#tr">Trasa</a></li><li><a href="#pg">Program dne</a></li><li><a href="#rg">Registrace</a></li></ul></div>
+    <div class="fc"><h4>Partnerství</h4><ul><li><a href="#sp">Summit Partner</a></li><li><a href="#sp">Alpine Partner</a></li><li><a href="#sp">Basecamp Partner</a></li><li><a href="mailto:SnezkaDuathlon2027@email.cz">Sponzorská poptávka</a></li></ul></div>
+    <div class="fc"><h4>Info</h4><ul><li><a href="#mi">Místo konání</a></li><li><a href="#kt">Kontakt</a></li><li><a href="https://www.instagram.com/snezkaduathlon">Instagram</a></li><li><a href="https://www.facebook.com/snezkaduathlon">Facebook</a></li></ul></div>
+  </div>
+  <div class="fbot">
+    <p>© 2027 Sněžka Duathlon Challenge · Novotný, Matějovský, Mužík, Švec · www.SnezkaDuathlon.cz</p>
+    <div class="fsoc">
+      <a href="https://www.instagram.com/snezkaduathlon">IG</a>
+      <a href="https://www.facebook.com/snezkaduathlon">FB</a>
+      <a href="mailto:SnezkaDuathlon2027@email.cz">EMAIL</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const wrap=document.getElementById('snow');
+  for(let i=0;i<55;i++){
+    const s=document.createElement('div');s.className='sf';
+    const sz=Math.random()*2.5+1;
+    s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*-20}px;animation-duration:${Math.random()*12+8}s;animation-delay:${Math.random()*10}s;opacity:${Math.random()*0.5+0.15}`;
+    wrap.appendChild(s);
+  }
+})();
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}
+  });
+});
+</script>
+</body>
+</html>
